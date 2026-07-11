@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aaryan Basnet — Robotics & AI</title>
+<meta name="description" content="Aaryan Basnet — BSc Robotics & Artificial Intelligence student at the University of Klagenfurt. Machine learning, computer vision, and full-stack projects. Open to working-student roles in Carinthia.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F7F8F4;
+    --ink:#14202E;
+    --ink-soft:#4A5A6B;
+    --line:#D8DDD3;
+    --cobalt:#2244E0;
+    --cobalt-soft:#E8ECFC;
+    --amber:#E8A020;
+    --green:#2E9E5B;
+    --card:#FFFFFF;
+    --mono:'IBM Plex Mono',monospace;
+    --sans:'IBM Plex Sans',sans-serif;
+    --display:'Space Grotesk',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:var(--sans);
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.6;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:48px 48px;
+    background-position:center top;
+  }
+  a{color:inherit;}
+  .wrap{max-width:1060px;margin:0 auto;padding:0 24px;}
+
+  /* ---------- top bar ---------- */
+  nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,248,244,.92);backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{display:flex;justify-content:space-between;align-items:center;height:60px;}
+  .logo{font-family:var(--mono);font-size:.85rem;letter-spacing:.08em;text-decoration:none;}
+  .logo b{color:var(--cobalt);}
+  .nav-links{display:flex;gap:24px;list-style:none;flex-wrap:wrap;}
+  .nav-links a{font-family:var(--mono);font-size:.78rem;text-decoration:none;color:var(--ink-soft);letter-spacing:.05em;}
+  .nav-links a:hover, .nav-links a:focus-visible{color:var(--cobalt);}
+  a:focus-visible{outline:2px solid var(--cobalt);outline-offset:3px;}
+
+  /* ---------- hero ---------- */
+  header{padding:96px 0 72px;border-bottom:1px solid var(--line);position:relative;}
+  .crosshair{position:absolute;font-family:var(--mono);font-size:.7rem;color:var(--ink-soft);opacity:.55;}
+  .ch-tl{top:24px;left:24px;} .ch-br{bottom:24px;right:24px;}
+  .status-line{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;
+    color:var(--ink-soft);margin-bottom:20px;
+    border:1px solid var(--line);background:var(--card);
+    padding:6px 14px;border-radius:999px;
+  }
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 2.2s infinite;}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+  @media (prefers-reduced-motion: reduce){.dot{animation:none}}
+  h1{
+    font-family:var(--display);font-weight:700;
+    font-size:clamp(2.6rem,7vw,4.6rem);
+    line-height:1.04;letter-spacing:-.02em;margin-bottom:20px;
+  }
+  h1 .accent{color:var(--cobalt);}
+  .hero-sub{max-width:640px;font-size:1.08rem;color:var(--ink-soft);margin-bottom:32px;}
+  .hero-meta{display:flex;flex-wrap:wrap;gap:12px 32px;font-family:var(--mono);font-size:.78rem;color:var(--ink-soft);letter-spacing:.04em;}
+  .hero-meta span b{color:var(--ink);font-weight:500;}
+  .hero-cta{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap;}
+  .btn{
+    font-family:var(--mono);font-size:.82rem;letter-spacing:.05em;
+    text-decoration:none;padding:12px 22px;border-radius:6px;
+    border:1px solid var(--ink);transition:transform .15s ease, box-shadow .15s ease;
+    display:inline-block;background:var(--card);
+  }
+  .btn-primary{background:var(--cobalt);border-color:var(--cobalt);color:#fff;}
+  .btn:hover{transform:translateY(-2px);box-shadow:0 4px 14px rgba(20,32,46,.14);}
+
+  /* ---------- section scaffolding ---------- */
+  section{padding:72px 0;border-bottom:1px solid var(--line);}
+  .sec-label{
+    font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;
+    color:var(--cobalt);margin-bottom:12px;display:block;
+  }
+  h2{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,3.4vw,2.2rem);margin-bottom:28px;letter-spacing:-.01em;}
+
+  /* ---------- about ---------- */
+  .about-grid{display:grid;grid-template-columns:1.4fr 1fr;gap:48px;align-items:start;}
+  .about-text p{margin-bottom:16px;color:var(--ink-soft);}
+  .about-text p b{color:var(--ink);font-weight:600;}
+  .spec-card{
+    background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:24px;font-family:var(--mono);font-size:.8rem;
+  }
+  .spec-card h3{font-family:var(--display);font-size:1rem;margin-bottom:16px;font-weight:600;}
+  .spec-row{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);}
+  .spec-row:last-child{border-bottom:none;}
+  .spec-row .k{color:var(--ink-soft);}
+  .spec-row .v{text-align:right;font-weight:500;}
+
+  /* ---------- skills ---------- */
+  .skill-groups{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:20px;}
+  .skill-box{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;}
+  .skill-box h3{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;color:var(--ink-soft);margin-bottom:14px;font-weight:500;}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chip{
+    font-family:var(--mono);font-size:.74rem;
+    background:var(--cobalt-soft);color:var(--cobalt);
+    padding:5px 11px;border-radius:5px;
+  }
+  .learning-strip{
+    margin-top:24px;background:var(--card);border:1px dashed var(--line);
+    border-radius:10px;padding:16px 22px;display:flex;gap:14px;align-items:center;flex-wrap:wrap;
+  }
+  .learning-strip .lab{font-family:var(--mono);font-size:.7rem;letter-spacing:.12em;color:var(--amber);}
+  .chip-warm{background:#FCF1DC;color:#B07508;}
+
+  /* ---------- experience ---------- */
+  .xp-list{display:flex;flex-direction:column;gap:0;}
+  .xp{
+    display:grid;grid-template-columns:170px 1fr;gap:24px;
+    padding:24px 0;border-bottom:1px dashed var(--line);
+  }
+  .xp:last-child{border-bottom:none;}
+  .xp-when{font-family:var(--mono);font-size:.75rem;color:var(--ink-soft);letter-spacing:.04em;padding-top:4px;}
+  .xp h3{font-family:var(--display);font-size:1.1rem;font-weight:600;}
+  .xp .org{font-family:var(--mono);font-size:.75rem;color:var(--cobalt);letter-spacing:.05em;margin-bottom:8px;display:block;}
+  .xp p{font-size:.92rem;color:var(--ink-soft);}
+
+  /* ---------- projects ---------- */
+  .proj-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
+  .proj{
+    background:var(--card);border:1px solid var(--line);border-radius:12px;
+    overflow:hidden;display:flex;flex-direction:column;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .proj:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(20,32,46,.12);}
+  .proj-visual{
+    height:150px;display:flex;align-items:center;justify-content:center;
+    font-size:3rem;border-bottom:1px solid var(--line);
+    background:
+      linear-gradient(var(--cobalt-soft) 1px, transparent 1px),
+      linear-gradient(90deg, var(--cobalt-soft) 1px, transparent 1px);
+    background-size:24px 24px;background-color:#FCFDFB;
+  }
+  .proj-body{padding:22px;display:flex;flex-direction:column;flex:1;}
+  .proj-tag{font-family:var(--mono);font-size:.68rem;letter-spacing:.1em;color:var(--cobalt);margin-bottom:8px;}
+  .proj h3{font-family:var(--display);font-size:1.18rem;font-weight:600;margin-bottom:10px;}
+  .proj p{font-size:.92rem;color:var(--ink-soft);flex:1;margin-bottom:16px;}
+  .proj-stack{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+  .proj-stack .chip{font-size:.68rem;padding:4px 9px;}
+  .proj-links{display:flex;gap:16px;font-family:var(--mono);font-size:.76rem;align-items:center;}
+  .proj-links a{color:var(--cobalt);text-decoration:none;border-bottom:1px solid transparent;}
+  .proj-links a:hover{border-bottom-color:var(--cobalt);}
+  .code-request{color:var(--ink-soft);font-style:normal;}
+  .proj-status{font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;padding:3px 8px;border-radius:4px;margin-left:auto;}
+  .st-live{background:#E4F3EA;color:var(--green);}
+  .st-wip{background:#FCF1DC;color:#B07508;}
+  .proj-head{display:flex;align-items:center;margin-bottom:8px;}
+
+  .proj-add{
+    border:2px dashed var(--line);background:transparent;border-radius:12px;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    text-align:center;padding:40px 24px;color:var(--ink-soft);min-height:340px;
+  }
+  .proj-add .plus{font-family:var(--display);font-size:2.6rem;color:var(--cobalt);line-height:1;margin-bottom:12px;}
+  .proj-add p{font-size:.88rem;max-width:220px;}
+  .proj-add .hint{font-family:var(--mono);font-size:.68rem;margin-top:10px;opacity:.7;}
+
+  /* ---------- contact ---------- */
+  .contact-row{display:flex;flex-wrap:wrap;gap:16px;}
+  .contact-card{
+    flex:1;min-width:220px;background:var(--card);border:1px solid var(--line);
+    border-radius:10px;padding:22px;text-decoration:none;
+    transition:transform .15s ease;
+  }
+  .contact-card:hover{transform:translateY(-3px);border-color:var(--cobalt);}
+  .contact-card .k{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--ink-soft);display:block;margin-bottom:6px;}
+  .contact-card .v{font-family:var(--display);font-weight:600;font-size:1rem;word-break:break-all;}
+
+  footer{padding:36px 0;font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);}
+
+  @media(max-width:760px){
+    .about-grid{grid-template-columns:1fr;}
+    .xp{grid-template-columns:1fr;gap:6px;}
+    .nav-links{gap:14px;}
+    header{padding:64px 0 48px;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top">AB<b>.</b>SYS</a>
+    <ul class="nav-links">
+      <li><a href="#about">ABOUT</a></li>
+      <li><a href="#skills">SKILLS</a></li>
+      <li><a href="#experience">EXPERIENCE</a></li>
+      <li><a href="#projects">PROJECTS</a></li>
+      <li><a href="#contact">CONTACT</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header id="top">
+  <span class="crosshair ch-tl">+ 46.62°N, 14.30°E</span>
+  <span class="crosshair ch-br">REV 1.1 / 2026 +</span>
+  <div class="wrap">
+    <div class="status-line"><span class="dot"></span>OPEN TO WORKING-STUDENT &amp; INTERNSHIP ROLES — ML / SOFTWARE / DATA, CARINTHIA</div>
+    <h1>Aaryan Basnet<br><span class="accent">Robotics &amp; AI</span> student<br>who builds things end-to-end.</h1>
+    <p class="hero-sub">
+      I study Robotics &amp; Artificial Intelligence at the University of Klagenfurt, with prior
+      industry experience as a data analyst. I like understanding systems from first principles —
+      then shipping them: ML pipelines, computer vision, and full-stack apps.
+    </p>
+    <div class="hero-meta">
+      <span>LOCATION <b>Klagenfurt / Feldkirchen, AT</b></span>
+      <span>DEGREE <b>BSc Robotics &amp; AI, AAU</b></span>
+      <span>GRAD <b>2028 (expected)</b></span>
+      <span>LANGUAGES <b>EN fluent / DE B1→B2 / NE native</b></span>
+    </div>
+    <div class="hero-cta">
+      <a class="btn btn-primary" href="#projects">View projects ↓</a>
+      <a class="btn" href="cv-aaryan-basnet.pdf" download>Download CV ⤓</a>
+      <a class="btn" href="https://github.com/Aaryanbasnet100" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <span class="sec-label">01 — ABOUT</span>
+    <h2>Conceptual first, then hands-on.</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          My approach to engineering starts with <b>"why"</b> before "how". Whether it's
+          backpropagation, memory management in operating systems, or Maxwell's equations,
+          I want the underlying model before I write a line of code.
+        </p>
+        <p>
+          Before university I worked as a <b>data analyst intern at 360VUZ in Dubai</b> —
+          collecting, cleaning and analysing datasets in Python, and turning results into
+          reports and dashboards. That experience taught me the hard part is rarely the model;
+          it's the messy data and the humans around it.
+        </p>
+        <p>
+          At AAU I've combined coursework in mathematics, physics, algorithms and operating
+          systems with applied projects: a <b>content-based video retrieval system</b> built
+          for the Video Browser Showdown competition, a <b>real-time emotion detection</b>
+          pipeline, and <b>ShiftFlow</b>, a multi-tenant scheduling app.
+        </p>
+      </div>
+      <div class="spec-card">
+        <h3>SPEC SHEET</h3>
+        <div class="spec-row"><span class="k">EDUCATION</span><span class="v">BSc Robotics &amp; AI, AAU Klagenfurt</span></div>
+        <div class="spec-row"><span class="k">FOCUS</span><span class="v">ML / CV / Data</span></div>
+        <div class="spec-row"><span class="k">INDUSTRY</span><span class="v">Data Analyst Intern, 360VUZ Dubai</span></div>
+        <div class="spec-row"><span class="k">COMPETITION</span><span class="v">Video Browser Showdown 2026</span></div>
+        <div class="spec-row"><span class="k">AVAILABILITY</span><span class="v">Part-time alongside studies</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <span class="sec-label">02 — SKILLS</span>
+    <h2>Toolbox</h2>
+    <div class="skill-groups">
+      <div class="skill-box">
+        <h3>MACHINE LEARNING / CV</h3>
+        <div class="chips">
+          <span class="chip">PyTorch</span><span class="chip">TensorFlow</span><span class="chip">scikit-learn</span>
+          <span class="chip">CLIP</span><span class="chip">FAISS</span><span class="chip">OpenCV</span>
+          <span class="chip">CNN / LSTM</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h3>DATA ANALYSIS &amp; REPORTING</h3>
+        <div class="chips">
+          <span class="chip">Pandas</span><span class="chip">NumPy</span><span class="chip">Power BI</span>
+          <span class="chip">Excel (advanced)</span><span class="chip">SQL</span><span class="chip">Experimental design</span>
+        </div>
+      </div>
+      <div class="skill-box">
+        <h3>SOFTWARE &amp; INFRA</h3>
+        <div class="chips">
+          <span class="chip">Python</span><span class="chip">Java</span><span class="chip">Dart / Flutter</span>
+          <span class="chip">Firebase</span><span class="chip">Docker</span><span class="chip">PostgreSQL</span>
+          <span class="chip">GitHub Actions</span><span class="chip">Streamlit</span>
+        </div>
+      </div>
+    </div>
+    <div class="learning-strip">
+      <span class="lab">CURRENTLY LEVELING UP //</span>
+      <span class="chip chip-warm">German B1 → B2</span>
+      <span class="chip chip-warm">C / C++</span>
+      <span class="chip chip-warm">Reinforcement learning</span>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <span class="sec-label">03 — EXPERIENCE</span>
+    <h2>Where I've worked</h2>
+    <div class="xp-list">
+      <div class="xp">
+        <div class="xp-when">06/2024 – 01/2025</div>
+        <div>
+          <h3>Data Analyst Intern</h3>
+          <span class="org">360VUZ · DUBAI</span>
+          <p>Collected, cleaned and processed datasets in Python (Pandas, NumPy) to support
+          data-driven decisions. Analysed trends and built reports and dashboards in Excel
+          and Power BI within a collaborative team.</p>
+        </div>
+      </div>
+      <div class="xp">
+        <div class="xp-when">11/2023 – 05/2024</div>
+        <div>
+          <h3>Junior Accountant</h3>
+          <span class="org">VAGA · DUBAI</span>
+          <p>Maintained financial records and processed daily transactions with high accuracy;
+          automated repetitive reporting with advanced Excel and Python scripts.</p>
+        </div>
+      </div>
+      <div class="xp">
+        <div class="xp-when">05/2025 – 06/2025</div>
+        <div>
+          <h3>Crew Member (part-time)</h3>
+          <span class="org">MCDONALD'S · FELDKIRCHEN IN KÄRNTEN</span>
+          <p>Worked in a fast-paced, German-speaking team — daily customer service and
+          coordination in German, following precise procedures under pressure.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <span class="sec-label">04 — PROJECTS</span>
+    <h2>Selected work</h2>
+    <div class="proj-grid">
+
+      <!-- ======= PROJECT CARD TEMPLATE ==================================
+           To add a new project: copy one whole <article class="proj"> block,
+           paste it before the "proj-add" card, and edit:
+           - the emoji / image in .proj-visual (or replace with <img src="...">)
+           - .proj-tag  (short category label)
+           - <h3>       (project name)
+           - .proj-status (st-live = done, st-wip = in progress)
+           - <p>        (2-3 sentence description: what it does + stack + result)
+           - .proj-stack chips
+           - the GitHub / demo links
+      ================================================================== -->
+
+      <article class="proj">
+        <div class="proj-visual" aria-hidden="true">🎬</div>
+        <div class="proj-body">
+          <div class="proj-head">
+            <span class="proj-tag">COMPUTER VISION</span>
+            <span class="proj-status st-live">COMPETED 2026</span>
+          </div>
+          <h3>Content-Based Video Retrieval</h3>
+          <p>
+            Interactive video search system built for the Video Browser Showdown 2026.
+            TransNet2 segments videos into shots, CLIP embeds them for semantic text-to-video
+            search, and FAISS indexes them for fast nearest-neighbour retrieval at scale.
+          </p>
+          <div class="proj-stack">
+            <span class="chip">Python</span><span class="chip">CLIP</span>
+            <span class="chip">FAISS</span><span class="chip">TransNet2</span>
+          </div>
+          <div class="proj-links">
+            <span class="code-request">CODE AVAILABLE ON REQUEST</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-visual" aria-hidden="true">😊</div>
+        <div class="proj-body">
+          <div class="proj-head">
+            <span class="proj-tag">DEEP LEARNING</span>
+            <span class="proj-status st-live">SHIPPED</span>
+          </div>
+          <h3>Real-Time Emotion Detector</h3>
+          <p>
+            CNN trained on the FER-2013 dataset for facial-emotion classification,
+            integrated with OpenCV for live webcam inference and served through a
+            Streamlit interface for real-time predictions.
+          </p>
+          <div class="proj-stack">
+            <span class="chip">TensorFlow</span><span class="chip">OpenCV</span><span class="chip">Streamlit</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Aaryanbasnet100/cnn_emotion_detector" target="_blank" rel="noopener">CODE ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-visual" aria-hidden="true">📅</div>
+        <div class="proj-body">
+          <div class="proj-head">
+            <span class="proj-tag">FULL-STACK APP</span>
+            <span class="proj-status st-wip">EVOLVING</span>
+          </div>
+          <h3>ShiftFlow</h3>
+          <p>
+            Multi-tenant shift-scheduling app managing staff schedules across multiple
+            organisations. Flutter for cross-platform UI, Firebase for authentication
+            and cloud database, with role-based access and real-time sync.
+          </p>
+          <div class="proj-stack">
+            <span class="chip">Flutter</span><span class="chip">Dart</span><span class="chip">Firebase</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Aaryanbasnet100/shift-manager-app" target="_blank" rel="noopener">CODE ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-visual" aria-hidden="true">🕸️</div>
+        <div class="proj-body">
+          <div class="proj-head">
+            <span class="proj-tag">AUTOMATION / DATA</span>
+            <span class="proj-status st-live">SHIPPED</span>
+          </div>
+          <h3>Sentinel — Self-Healing Scraper</h3>
+          <p>
+            Containerised scraping and data-pipeline system with fallback parsing logic
+            that recovers from site changes. PostgreSQL for persistence, GitHub Actions
+            for automated scheduled runs, Pandas for reporting.
+          </p>
+          <div class="proj-stack">
+            <span class="chip">Python</span><span class="chip">Docker</span>
+            <span class="chip">PostgreSQL</span><span class="chip">CI/CD</span>
+          </div>
+          <div class="proj-links">
+            <span class="code-request">CODE AVAILABLE ON REQUEST</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="proj">
+        <div class="proj-visual" aria-hidden="true">🌦️</div>
+        <div class="proj-body">
+          <div class="proj-head">
+            <span class="proj-tag">TIME SERIES</span>
+            <span class="proj-status st-live">SHIPPED</span>
+          </div>
+          <h3>Weather Forecasting: LSTM vs CNN</h3>
+          <p>
+            Comparative time-series experiments on the Jena Climate dataset using
+            sliding-window sequencing. Evaluated both architectures and documented
+            why the LSTM best captured long-range temporal dependencies.
+          </p>
+          <div class="proj-stack">
+            <span class="chip">PyTorch</span><span class="chip">LSTM</span><span class="chip">CNN</span>
+          </div>
+          <div class="proj-links">
+            <a href="https://github.com/Aaryanbasnet100/basic-lab-project" target="_blank" rel="noopener">CODE ↗</a>
+          </div>
+        </div>
+      </article>
+
+      <!-- Placeholder: swap this out with a real card as you build more -->
+      <div class="proj-add">
+        <div class="plus">+</div>
+        <p>More projects in progress — robotics, reinforcement learning, and NLP experiments.</p>
+        <span class="hint">// copy a card above to add one</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <span class="sec-label">05 — CONTACT</span>
+    <h2>Get in touch</h2>
+    <div class="contact-row">
+      <a class="contact-card" href="mailto:basnetaryan123@gmail.com">
+        <span class="k">EMAIL</span>
+        <span class="v">basnetaryan123@gmail.com</span>
+      </a>
+      <a class="contact-card" href="https://github.com/Aaryanbasnet100" target="_blank" rel="noopener">
+        <span class="k">GITHUB</span>
+        <span class="v">@Aaryanbasnet100</span>
+      </a>
+      <a class="contact-card" href="https://www.linkedin.com/in/aryan-basnet-7a290a202/" target="_blank" rel="noopener">
+        <span class="k">LINKEDIN</span>
+        <span class="v">aryan-basnet</span>
+      </a>
+      <a class="contact-card" href="cv-aaryan-basnet.pdf" download>
+        <span class="k">CV</span>
+        <span class="v">Download PDF ⤓</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap" style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+    <span>© 2026 AARYAN BASNET</span>
+    <span>BUILT BY HAND · HOSTED ON GITHUB PAGES</span>
+  </div>
+</footer>
+
+</body>
+</html>
